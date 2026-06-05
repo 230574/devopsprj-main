@@ -58,8 +58,8 @@ jobs:
 
     # --- 【★追加ステップC: EC2のセキュリティグループでポート22（SSH）を一瞬だけ開放】 ---
     - name: Authorize Security Group Ingress (Open SSH)
-      continue-on-error: true			      # ★追加
-      env:					      # ★追加
+      continue-on-error: true
+      env:
         AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
       run: |
         # AWSのコマンドを使って、先ほど取得したGitHubのIPアドレス（/32）からのSSH接続を一時的に許可します
@@ -100,7 +100,7 @@ jobs:
     - name: Revoke Security Group Ingress (Close SSH)
       # 「if: always()」を付けることで、途中のファイル転送や起動コマンドがエラーで失敗した場合でも、この閉める処理だけは絶対に強制実行させます
       if: always()
-      env:					      # ★追加
+      env:
         AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }} # ★追加
       run: |
         # 先ほど一時的に許可したGitHub ActionsのIPアドレスのアクセス権限を、セキュリティグループから完全に消去します

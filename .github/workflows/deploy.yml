@@ -49,7 +49,6 @@ jobs:
     # --- 【★追加ステップB: AWS CLIを使うための認証設定】 ---
     - name: Configure AWS Credentials
       # AWS公式の認証用パーツを使い、GitHubのSecretsからAWSの鍵を読み込んでセットします
-
       uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -62,7 +61,6 @@ jobs:
       continue-on-error: true			      # ★追加
       env:					      # ★追加
         AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }} # ★追加
-
       run: |
         # AWSのコマンドを使って、先ほど取得したGitHubのIPアドレス（/32）からのSSH接続を一時的に許可します
         aws ec2 authorize-security-group-ingress \
